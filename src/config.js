@@ -1,4 +1,4 @@
 export default {
-  API_FOLDERS: "postgresql://postgres@localhost/api/folders",
-  API_NOTES: "postgresql://postgres@localhost/api/notes",
+  API_FOLDERS: 'http://localhost:8000/api/folders/',
+  API_NOTES: "http://localhost:8000/api/notes/",
 }

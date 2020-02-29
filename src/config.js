@@ -1,3 +1,4 @@
 export default {
-  API_ENDPOINT: "postgresql://postgres@localhost/noteful_server",
+  API_FOLDERS: "postgresql://postgres@localhost/api/folders",
+  API_NOTES: "postgresql://postgres@localhost/api/notes",
 }

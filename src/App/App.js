@@ -17,21 +17,23 @@ class App extends Component {
         error: null
     };
 
+
+
+
     componentDidMount() {
-        fetch(config.API_ENDPOINT, {
-            method: "GET",
-            headers: {
-                "content-type": "application/json"
-            }
-        })
-            .then(res => {
-                if (!res.ok) {
-                    throw new Error(res.status);
-                }
-                return res.json();
+        Promise.all([fetch(`${config.API_NOTES}`), fetch(`${config.API_FOLDERS}`)])
+            .then(([notesRes, foldersRes]) => {
+                if (!notesRes.ok) return notesRes.json().then((e) => Promise.reject(e));
+                if (!foldersRes.ok) return foldersRes.json().then((e) => Promise.reject(e));
+
+                return Promise.all([notesRes.json(), foldersRes.json()]);
             })
-            .then(console.log(res))
-            .catch(error => this.setState({ error }));
+            .then(([notes, folders]) => {
+                this.setState({ notes, folders });
+            })
+            .catch((error) => {
+                console.log({ error });
+            });
     }
 
     renderNavRoutes() {
